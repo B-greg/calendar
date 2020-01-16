@@ -1,14 +1,13 @@
-import { getDay, eachDayOfInterval, startOfMonth, endOfMonth } from "date-fns";
+import { getDay, eachDayOfInterval, startOfMonth, endOfMonth, format } from "date-fns";
 
-class DateUtil {
-  static getListOfDayFromMonth(date: Date): Date[] {
+export function getListOfDayFromMonth(date: Date): Date[] {
     return eachDayOfInterval({
       start: startOfMonth(date),
       end: endOfMonth(date)
     });
   }
 
-  static getDayOfTheWeek(firstMonthDay: Date): number {
+  export function getDayOfTheWeek(firstMonthDay: Date): number {
     var day = getDay(firstMonthDay) - 1;
     if (day === -1) {
       return 6;
@@ -16,6 +15,12 @@ class DateUtil {
       return day;
     }
   }
-}
 
-export default DateUtil;
+  export function formatDate(date: Date): string {
+    try{
+      return format(date, 'd LLLL yyyy');
+    } catch {
+      return "";
+    }
+  }
+

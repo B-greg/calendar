@@ -1,5 +1,6 @@
 import React, { FC, useState, ChangeEventHandler } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
@@ -23,6 +24,8 @@ const EventForm: FC<EventFormProps> = props => {
   const { open, date, eventDescription, onClose, onSave } = props;
   const classes = useStyles(props);
   const [description, setDescription] = useState(eventDescription);
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
 
   const updateDescription: ChangeEventHandler<HTMLInputElement> = event =>
     setDescription(event.target.value);
@@ -35,29 +38,41 @@ const EventForm: FC<EventFormProps> = props => {
     onClose();
   };
 
-  function resetToInitState(){
+  function resetToInitState() {
     setDescription("");
   }
 
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title" onEnter={() => { setDescription(eventDescription)}}>
+    <Dialog
+      fullWidth
+      open={open}
+      onClose={onClose}
+      aria-labelledby="form-dialog-title"
+      fullScreen={fullScreen}
+      onEnter={() => {
+        setDescription(eventDescription);
+      }}
+    >
       <DialogTitle id="form-dialog-title">{date}</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
           margin="dense"
-          label="description"
+          label="Description"
           type="text"
           value={description}
           onChange={updateDescription}
           fullWidth
+          inputProps={{
+            maxLength: 40
+          }}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} color="primary">
+        <Button onClick={onClose} color="secondary">
           Cancel
         </Button>
-        <Button onClick={saveEvent} color="primary">
+        <Button onClick={saveEvent} variant="contained" color="primary">
           Save
         </Button>
       </DialogActions>
