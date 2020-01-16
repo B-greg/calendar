@@ -1,4 +1,4 @@
-import { getDay, eachDayOfInterval, startOfMonth, endOfMonth, format } from "date-fns";
+import { eachDayOfInterval, endOfMonth, format, getDay, startOfMonth } from "date-fns";
 
 export function getListOfDayFromMonth(date: Date): Date[] {
     return eachDayOfInterval({

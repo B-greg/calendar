@@ -1,14 +1,12 @@
-import React, { FC, useState, ChangeEventHandler } from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { setDate } from "date-fns/esm";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import TextField from "@material-ui/core/TextField";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
+import React, { ChangeEventHandler, FC, useState } from "react";
 
 const useStyles = makeStyles(theme => ({}));
 
@@ -25,7 +23,7 @@ const EventForm: FC<EventFormProps> = props => {
   const classes = useStyles(props);
   const [description, setDescription] = useState(eventDescription);
   const theme = useTheme();
-  const fullScreen = useMediaQuery(theme.breakpoints.down("sm"));
+  const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
 
   const updateDescription: ChangeEventHandler<HTMLInputElement> = event =>
     setDescription(event.target.value);

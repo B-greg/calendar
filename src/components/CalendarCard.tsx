@@ -1,9 +1,11 @@
-import React, { FC } from "react";
-import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import React, { FC } from "react";
+import {
+  formatDate,
+  getDayOfTheWeek,
+  getListOfDayFromMonth
+} from "../utils/DateUtil";
 import DayCard from "./DayCard";
-import { getDayOfTheWeek, getListOfDayFromMonth, formatDate} from "../utils/DateUtil";
 
 const useStyles = makeStyles(
   theme => ({
@@ -14,7 +16,7 @@ const useStyles = makeStyles(
       marginTop: theme.spacing(2),
       width: "560px",
       flexFlow: "row",
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down("xs")]: {
         flexFlow: "column",
         width: "100%"
       }
@@ -22,7 +24,7 @@ const useStyles = makeStyles(
     calendarWeek: {
       display: "flex",
       justifyContent: "center",
-      [theme.breakpoints.down("sm")]: {
+      [theme.breakpoints.down("xs")]: {
         flexFlow: "column"
       }
     }
@@ -31,17 +33,20 @@ const useStyles = makeStyles(
 );
 
 interface CalendarCardProps {
+  year: number;
   month: number;
   calendarEvent: Map<string, string>;
-  onClick: (date: Date) => void
+  onClick: (date: Date) => void;
 }
 
 const CalendarCard: FC<CalendarCardProps> = props => {
-  const { month, calendarEvent, onClick } = props;
+  const { year, month, calendarEvent, onClick } = props;
   const classes = useStyles(props);
-  const firstMonthDay = new Date(2020, month, 1);
+  
+  const firstMonthDay = new Date(year, month, 1);
   const allDayOfCurrentMonth = getListOfDayFromMonth(firstMonthDay);
-  var firstDayOfWeek = getDayOfTheWeek(firstMonthDay);
+  const firstDayOfWeek = getDayOfTheWeek(firstMonthDay);
+
   return (
     <div className={classes.calendar}>
       {[...Array(42)]

@@ -1,10 +1,10 @@
-import React, { FC, useState, ChangeEventHandler } from "react";
+import { IconButton, Toolbar, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Toolbar, IconButton, Typography } from "@material-ui/core";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import Month from "../types/Month";
+import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import clsx from "clsx";
+import React, { FC } from "react";
+import Month from "../types/Month";
 
 const useStyles = makeStyles(theme => ({
     ToolbarCenter: {
@@ -41,7 +41,7 @@ const CalendarToolBar: FC<CalendarToolBarProps> = props => {
         aria-label="Next"
         color="inherit"
         onClick={nextMonth}
-        disabled={selectedMonth > 10}
+        disabled={selectedMonth >= 11}
       >
         <NavigateNextIcon />
       </IconButton>

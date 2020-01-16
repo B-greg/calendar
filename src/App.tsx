@@ -1,28 +1,22 @@
+import { AppBar, Grid } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+import { getMonth, getYear } from "date-fns";
 import React, { useState } from "react";
-import logo from "./logo.svg";
 import CalendarCard from "./components/CalendarCard";
 import CalendarToolBar from "./components/CalendarToolBar";
-import { makeStyles } from "@material-ui/core/styles";
-import { formatDate} from "./utils/DateUtil";
-
-import {
-  AppBar,
-  Grid
-} from "@material-ui/core";
-
-import { getMonth, getYear } from "date-fns";
-import Month from "./types/Month";
-import clsx from "clsx";
 import EventForm from "./components/EventForm";
 import DateFrom from "./types/DateForm";
+import { formatDate } from "./utils/DateUtil";
 
 const useStyles = makeStyles(theme => ({
   bottomBar: {
-    [theme.breakpoints.up("md")]: {
+    [theme.breakpoints.up("sm")]: {
       display: "none"
-    }
+    },
+    marginTop: theme.spacing(2)
   }
 }));
+
 const App: React.FC = () => {
   const classes = useStyles();
   const currentDate = new Date();
@@ -85,6 +79,7 @@ const App: React.FC = () => {
         alignItems="center"
       >
         <CalendarCard
+          year={year}
           month={selectedMonth}
           calendarEvent={calendarEvent}
           onClick={date => calendarDateClick(date)}
