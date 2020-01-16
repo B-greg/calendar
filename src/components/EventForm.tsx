@@ -20,7 +20,6 @@ interface EventFormProps {
 
 const EventForm: FC<EventFormProps> = props => {
   const { open, date, eventDescription, onClose, onSave } = props;
-  const classes = useStyles(props);
   const [description, setDescription] = useState(eventDescription);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("xs"));
